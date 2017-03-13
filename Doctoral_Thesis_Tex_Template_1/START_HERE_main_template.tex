@@ -1,0 +1,334 @@
+% Noorie Hyun's Thesis document : Main code
+% using UNC dissertation format with modification
+%
+% Citation is ASA style. 
+% To include landscape tables, the following package is not used: usepackage[nolists,nomarkers]{endfloat}.
+% The necesary file along with this main code is natbib (as modified by Noah Hoffman) and asa.bst.
+% This code is edited by TeXnicCenter.
+
+
+\includeonly{abs,intro}
+\documentclass[12pt]{report}
+\usepackage{uncthesis_spring2014}      %UNC BIOSTAT Thesis Style: modified by Noorie Hyun in May 2014
+
+%\setcounter{secnumdepth}{3} \setcounter{tocdepth}{2}
+
+% Define Chapter Title Format :
+%  \titleformat{\chapter}{\singlespace\normalsize\bfseries\centering\uppercase}{%\text{ } 
+%		}{0.5em}{\chaptertitlename \thechapter: #1}{} 
+%		\titlespacing{\chapter}{12pt}{0.9in}{12pt}%{12pt}{12pt}{12pt} 2 inch from the top to
+
+\author{First Last}
+
+%*********************************************** USEPACKAGE SECTION *******************************
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage{moresize}
+\usepackage{indentfirst} 
+%\usepackage{MnSymbol}
+\usepackage{amssymb,amsmath,amsfonts,
+	amsthm,latexsym,amscd,amsxtra}
+\usepackage[active]{srcltx}
+\usepackage{amstext}
+\usepackage{amsgen}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{esint}
+\usepackage{appendix}
+\usepackage{mathrsfs}
+%\usepackage{mathtools}
+\usepackage[round]{natbib}
+\usepackage{lscape}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{epstopdf}   %eps file to pdf (for image files)
+\usepackage[dvips]{epsfig}
+\usepackage{float}
+\usepackage{hhline}     % this is for my tables -SBL
+\usepackage{subfigure}  % use for side-by-side figures
+\usepackage{booktabs}   % for table
+\usepackage{multirow}   % for table
+\usepackage[figuresright]{rotating}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{threeparttable}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{color}      % use if color is used in text
+\usepackage[subfigure]{tocloft}  % use for side-by-side figures
+\usepackage{subfigure}
+\usepackage{booktabs}   % for table
+\usepackage{multirow}   % for table
+\usepackage[figuresright]{rotating}
+\usepackage{tabularx}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec} %05/22/14: NHyun added this to make the font size of the chapter headings not that large!
+\usepackage{titletoc} %05/22/14 NHyun added this to fix the appendix tables in Table of Contents
+%\usepackage[nolists,nomarkers]{endfloat} %excluded to contain landscape tables
+
+%\usepackage[justification=centering]{caption}[2008/04/01]
+\usepackage[]{caption}[2008/04/01]
+
+
+\input{your_custom_definitions.tex}
+
+
+
+%*********************************************** NEWCOMMAND DEFINITION SECTION *******************************
+\global\long\def\refname{REFERENCE}
+\global\long\def\appendixname{APPENDIX}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{definition}{Definition}
+%\newtheorem{notation}{Notation}
+%\newtheorem{proposition}{Proposition}
+%\newtheorem{algorithm}{Algorithm}
+%\newtheorem{corollary}{Corollary}
+%\newtheorem{remark}{Remark}
+%\newtheorem*{prf}{Proof}
+%\newtheorem{claim}{Claim}
+
+
+\newcommand{\Keywords}[1]{\par\noindent{\small{\em Keywords\/}: #1}} 
+
+\providecommand{\tabularnewline}{\\}
+%% A simple dot to overcome graphicx limitations
+\newcommand{\lyxdot}{.}
+
+
+\makeatletter
+
+%For table width
+\newcommand\T{\rule{0pt}{2.6ex}}
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}}
+\bibpunct{(}{)}{,}{a}{}{;} %Citation punctuaion and parenthesis
+
+
+% The following two commands are used to insert extra space
+% in the list of figures (LOF) and LOT -- R. Yang, June 2003
+% the spacing can be adjusted, default is 12pt.
+\newcommand{\addLOFspace}[1][12pt]{\addtocontents{lof}{\protect\addvspace{#1}}}
+\newcommand{\addLOTspace}[1][12pt]{\addtocontents{lot}{\protect\addvspace{#1}}}
+
+% Define Long Chapter Title Format --- N. Hyun, 05/22/2014
+    \titleformat{\chapter}{\singlespace\normalsize\bfseries\centering\uppercase}{%\text{ } 
+    	%hspace .03 true in added B. Barkley 2017-01-20
+		}{0.5em}{\chaptertitlename \hspace{.03 true in} \thechapter:  #1}{} 
+		\titlespacing{\chapter}{12pt}{0.9in}{12pt}
+
+
+% These commands add some vertical space between the footnotes and the
+% rule, and more importantly add an 11pt space between the footnotes
+% where more than one appears on a page, per the Margin Lady's requests.
+% This is not included in the uncthesis.sty and I couldn't
+% figure out how to include it, so I put it in my preamble.
+% They are adopted from http://www.cs.sfu.ca/LocalDoc/latex/thesis/csthesis.sty
+%-SBL
+
+\addtolength{\skip\footins}{1ex}%% push 1st ftn further from text
+\settoheight{\footnotesep}{\footnotesize !}%% space between footnotes
+\addtolength{\footnotesep}{10.25pt}%% 10.25pt for 11pt size
+\brokenpenalty=10000
+% End of footnote spacing commands.-SBL
+
+% --------------------------------------------------------------------
+% ------- TOC(Total of Contents) BS 
+% D Kessler (Fall 2013?): Eventually was able to satisfy the "about three quarters"
+% business...
+\renewcommand{\cftchapnumwidth}{0.22in}
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+\renewcommand{\cftparskip}{2pt}
+
+\cftsetrmarg{2.125in} %NB: This line fixes the "`about three quarters"' stuff
+\renewcommand{\cftbeforelottitleskip}{12pt}
+\renewcommand{\cftbeforeloftitleskip}{12pt}
+\renewcommand{\cftafterlottitleskip}{12pt}
+
+\def\bibsection{\section*{\centering \bf{REFERENCE} }\vskip 1em}  %N.Hyun added 5/22/2014: to redefine section title because \bibliography misses section ttile
+\newcommand{\nc}{\newpage \clearpage}
+
+
+
+% -------------------------- BEGIN DOCUMENT ---------------------------------------------------
+\begin{document}
+
+\thesistitle{THESIS TITLE}
+\thesisauthor{Your Z. Name}
+
+\thesisadvisora{Dr.\ Advisor A}
+
+%\thesisadvisorb{Dr.\ Advisor B}
+
+\thesismembera{Dr.\ Committee A}
+
+\thesismemberb{Dr.\ Committee B} 
+
+\thesismemberc{Dr.\ Committee C}
+
+\thesismemberd{Dr.\ Committee D}
+
+\thesismaketitle 
+\thesismakecopyright
+
+
+\addtolength{\headsep}{-0.1875in} % pull top margin up 3/16 inch--R. Yang, June 2003
+\doublespace
+\begin{abstract}
+\vspace{1pc}
+%Maximum for UNC dissertation is 350 words.
+\input{Chp_0_your_abstract.tex}
+
+\end{abstract}
+
+%\begin{acknowledgments}
+%\vspace{1pc}
+%%\input{ack}
+%Lorem Ipsum Acknowledgements
+%\end{acknowledgments}
+
+
+%---------------------------------------TABLE OF CONTENTS --------------------------------------------------------
+\clearpage
+%\doublespace
+\begin{spacing}{1}
+\setlength{\cftbeforechapskip}{0.3cm}
+\setlength{\cftbeforesecskip}{0.3cm}
+\setlength{\cftbeforesubsecskip}{0.3cm}
+\setlength{\cftbeforefigskip}{0.2cm}
+\setlength{\cftbeforetabskip}{0.3cm}
+%\setlength\cftaftertoctitleskip{0.2cm} %NB added these on 11/07/13
+%\setlength\cftafterlottitleskip{0.2cm} %NB added these on 11/07/13
+%\setlength\cftafterloftitleskip{0.2cm} %NB added these on 11/07/13
+%the above 3 commands are important to reduce the spacing between the titles (TOC, LOF, and lOT) and subsequent text to about 1 double spaced line 
+%
+\setlength\parskip{\baselineskip}
+{\normalsize
+
+\tableofcontents
+
+%---------------------------------    LIST OF TABLES        --------------------------------------
+\begingroup
+\setlength\parskip{\baselineskip}
+\newpage
+ \vspace*{-1.5\baselineskip}
+	\titlespacing{\section}{12pt}{1em}{12pt}
+\addcontentsline{toc}{section}{\hskip -2 in \listtablename}
+\listoftables   
+
+\newpage
+\clearpage
+  \vspace*{-1.5\baselineskip}
+	\titlespacing{\section}{12pt}{1em}{12pt}%{12pt}{12pt}{12pt}
+\addcontentsline{toc}{section}{\hskip -2 in \listfigurename}
+\listoffigures  % if necessary
+\endgroup
+}
+\end{spacing}
+%%%%%%%%%%%%%%%%%%%%%END TOC%%%%%%%%%%%%%
+ 
+
+%-------------------------------CHAPTERS-----------------------------------------------%
+\begingroup
+\setlength\parskip{\baselineskip}
+\endgroup
+
+\begin{doublespace}
+\cleardoublepage % necessary to make arabic not spill backwards onto loa
+\pagenumbering{arabic}
+
+
+%----------------------- Chapter 1: Lit Review -----------------------------%
+%\chapter[Title for Table of Contents]{Title for body of document} \label{Chp:LitReview}
+%----------------------- Chapter 1: Lit Review -----------------------------%
+\chapter{Literature Review} \label{Chp:LitReview}
+
+\input{Chp_1_Literature_Review.tex}
+
+%--Ch3: Topic 1 ---------------%
+\chapter{Your First Topic} \label{Chp:topic1}
+
+\input{Chp_2_your_first_topic.tex}
+
+\chapter{Your Second Topic} \label{Chp:topic2}
+
+\input{Chp_3_your_second_topic.tex}
+
+\chapter[Topic 3 short title]{Your Third Topic} \label{Chp:topic3}
+
+\input{Chp_4_your_third_topic.tex}
+
+
+\appendix
+\newcommand{\appchapter}[1]{\let\oldthechapter\thechapter
+  \renewcommand{\thechapter}{Appendix A}  
+  \section{#1}\let\thechapter\oldthechapter}
+
+%%%%%--Appendix ---------------%
+\newpage
+\append{B}{Technical Details for Chapter 2}
+\renewcommand{\thesection}{A.\arabic{section}}
+%%%%%input file here%%%%%
+\input{Chp_2_appendix}	
+%%%%%input file here%%%%%
+\nc
+
+%
+%\append{B}{Technical Details for Chapter 4}
+%\renewcommand{\thesection}{B.\arabic{section}}
+%\setcounter{section}{0}
+%%\input{Appendix2}
+%\nc
+%
+%
+%\append{C}{Technical Details for Chapter 5}
+%\renewcommand{\thesection}{C.\arabic{section}}
+%\setcounter{section}{0}
+%%\input{Appendix3}
+%\nc
+
+
+\end{doublespace}
+
+%%%%%%%%%%%%%%%%%%BIBLIOGRAPHY%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%\setlength\parskip{\baselineskip}
+\begingroup
+\begin{singlespace}
+%   \cleardoublepage\thispagestyle{plain} 
+  
+		%\titleformat{\bibsection}
+    % {\normalfont\normalsize\bfseries}{\bibsection}{2em}{\MakeTextUppercase{#1}}
+ 
+   
+   %\bibliographystyle{abbrev}
+   \bibliographystyle{asa}
+%   \nocite{*}   
+   \addcontentsline{toc}{chapter}{BIBLIOGRAPHY}	   %%NHyun added 5/22/2014: to make an index in table of contents      
+   %\bibliography{C:/Users/Noorie/Documents/Tex/References}				      
+%   \bibliography{References}				      
+%   
+%   \bibliographystyle{biom}
+ \bibliography{your_bibtex_references}
+\end{singlespace}
+\endgroup
+
+
+\end{document}
+% ------------------------------------------------------------------------
+
+
+
+%\singlespace % Need this because the Grad school requires single-spaced
+% bib entries with double spacing between them and uncthesis.sty would
+% otherwise double space everything in the bib. -SBL
+% ------------------------------------------------------------------------
+
+
+
+
