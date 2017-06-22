@@ -1,0 +1,5 @@
+---
+output: pdf_document
+---
+
+Or you can split chapters/sections/paragraphs or even words in separate child documents.

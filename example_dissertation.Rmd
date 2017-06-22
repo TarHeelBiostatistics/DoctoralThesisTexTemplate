@@ -1,0 +1,40 @@
+---
+title: "Example Dissertation"
+author: "Bradley Saul"
+date: "June 22, 2017"
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: pdflatex
+    template: UNC_thesis_template.tex
+bibliography: example.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This is an example thesis .Rmd template, which, when compiled, uses the `UNC_thesis_template.tex` file to create both a `.tex` file and a `.pdf` file.
+
+NOTE: `UNC_thesis_template.tex` is under development and does NOT (yet) meet the UNC graduate school guidelines.
+
+# Chapter 2
+
+One could put all the text in a single `.Rmd` file.
+
+# Chapter 3
+
+```{r, child='example_child.Rmd'}
+```
+
+## How to make Citations 
+
+You cite articles using `rmarkdown` syntax (google rmarkdown for helpful hints). For example, @halmos1970howto is a good text read. Or writing about mathematics is challenging [@halmos1970howto].
+
+# References
+
+
