@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-.Rproj
 **.bbl
 **.pdf
 example_dissertation.tex
+*.Rproj
