@@ -1,7 +1,19 @@
 ---
 title: "Example Dissertation"
-author: "Bradley Saul"
+author: 
+  first: First
+  last: Last
+  middle: M.
+  committee:
+    advisora: Dr. Friendly Advisor
+    advisorb: Dr. Awesome Advisor
+    membera: Dr. Who
+    memberb: Major Major Major Major
+    memberc: Dr. Strangelove
+    memberd: Dr. Doolittle
 date: "June 22, 2017"
+fontsize: 12pt
+documentclass: report
 output: 
   pdf_document:
     citation_package: natbib
@@ -12,13 +24,20 @@ output:
     includes: 
       in_header: example_header_include.tex
 bibliography: example.bib
+bibliography-style: asa
+toc: true
+lot: true
+abstract: I have an abstract!
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction
+
+# Introduction 
+
+## Getting started
 
 This is an example thesis .Rmd template, which, when compiled, uses the `UNC_thesis_template.tex` file to create both a `.tex` file and a `.pdf` file.
 
@@ -30,19 +49,39 @@ You can put custom definitions in a file to be included in the .tex header. For 
 ```
 in `example_header_include.tex`  allow you to type `\cA` in the text which, when compiled, yields: $\cA$. Change the filename as necessary but be sure to update the filename in the YAML header.
 
-# Chapter 2
+## Another thing
+
+I have more to say such as, "I can put a table here"
+
+\begin{table}[ht]
+\caption{This is my first table.}
+\label{tab:1}
+\begin{tabular}{c|c}
+$\sigma$ & $\theta$ \\
+\hline \\
+1.2 & 4 
+\end{tabular}
+\end{table}
+
+# My estimator beats your estimator
+
+## Put all you work here
 
 One could put all the text in a single `.Rmd` file.
 
-# Chapter 3
+## Or in separate files
 
 ```{r, child='example_child.Rmd'}
 ```
 
-## How to make Citations 
+# How to cite
+
+You can also cite other papers.
+
+## rmarkdown syntax
 
 You cite articles using `rmarkdown` syntax (google rmarkdown for helpful hints). For example, @halmos1970howto is a good text read. Or writing about mathematics is challenging [@halmos1970howto].
 
-# References
+
 
 
