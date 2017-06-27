@@ -1,0 +1,749 @@
+% uncthesis.sty -- UNC Thesis Style
+% Originally Created: Sat May 18 12:43:26 1996 by faith@acm.org
+%                     and modified by many authors. 
+%                          
+%
+% This program comes with ABSOLUTELY NO WARRANTY.
+%
+% $Id: uncthesis.sty,v 1.1 2006/01/11 14:17:43 jsteinhu Exp $
+%
+% References in []'s from : ``A Guide to the Preparation and Submission of
+% Theses and Dissertations'' (The Graduate School, The University of North
+% Carolina at Chapel Hill).  See: http://gradschool.unc.edu/academics/thesis-diss/guide/
+%
+% Modified July 7, July 15, 2000 by John Keyser
+% Modified January 2002 by Tom Hudson
+% Modified Spring 2003 by Michele Weigle
+% Modified Summer 2005 by Stephen Long (approved 6/14/05 by Nancy Rose
+% (reigning Margins Lady) at the Grad School).
+% Modified Spring 2007 by Peter K. Enns (PKE)
+% Modified Spring 2007 by Altin Ilirjani
+% Modified Spring 2007 - Enns and Ilirjani changes combined by Evan Parker-Stephen
+% Modified Spring 2014 by Noorie Hyun (NHyun) -based on the stye files or advice of Chaeryon Kang, Dustin Long, Naomi Chana Brownstein, David Kessler and Baiming Zou.
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{uncthesis_spring2014}[1997/11/25] %[$\mbox{}$Revision: 1.1 $\mbox{}$]
+\typeout{UNC Thesis Style, $Revision: 1.1 $, by Rik Faith
+(faith@cs.unc.edu)}
+
+\RequirePackage{ifthen}
+%\RequirePackage{doublespace}
+\RequirePackage{setspace,geometry}   % Changed doublespace to setspace -- MCW 4/13/03
+\RequirePackage{comment}
+\RequirePackage[explicit]{titlesec}
+
+% Make copyright use uppercase C
+%\DeclareTextCommandDefault{\copyright}{{\textcircled{C}}}
+% Make copyright symbol fit in circle and be sans-serif  -MCW 5/21/03
+\DeclareTextCommandDefault{\copyright}{{\textcircled{\textsf{c}}}}
+
+
+% Set up spacing.  Magic numbers are from p. 53 of The LaTeX Companion
+% (Goosens, Mittlebach, Samarin; Addison-Wesley Publishing Co., 1994).
+% [XI. SPACING AND INDENTATION]
+
+                                 % Set up one and one-half spacing
+\ifthenelse{\@ptsize = 0}{\setstretch{1.25}}{} % 10-point
+\ifthenelse{\@ptsize = 1}{\setstretch{1.21}}{} % 11-point
+\ifthenelse{\@ptsize = 2}{\setstretch{1.24}}{} % 12-point
+\def\unc@adjusttitlespacing{\vspace*{-\baselineskip}\vspace*{-1ex}}
+\def\unc@adjustabstractspacing{\vspace*{-2\baselineskip}\vspace*{-2ex}}
+\def\unc@adjustchapterspacing{\vspace*{-\baselineskip}}
+\def\unc@adjustbibspacing{\vspace*{-\baselineskip}}
+
+\DeclareOption{double}{                  % Set up double spacing
+  \ifthenelse{\@ptsize = 0}{\setstretch{1.67}}{} % 10-point
+  \ifthenelse{\@ptsize = 1}{\setstretch{1.62}}{} % 11-point
+  \ifthenelse{\@ptsize = 2}{\setstretch{1.66}}{} % 12-point
+  \def\unc@adjusttitlespacing{\vspace*{-\baselineskip}\vspace*{-1ex}}
+  \def\unc@adjustabstractspacing{\vspace*{-2\baselineskip}\vspace*{-1.6ex}}
+  \def\unc@adjustchapterspacing{\vspace*{-\baselineskip}\vspace*{0.6ex}}
+  \def\unc@adjustbibspacing{\vspace*{-\baselineskip}\vspace*{-1.2ex}}
+}
+
+\DeclareOption{single}{
+  \setstretch{1}                % Set up single spacing
+  \def\unc@adjusttitlespacing{\vspace*{-\baselineskip}\vspace*{-1ex}}
+  \def\unc@adjustabstractspacing{\vspace*{-2\baselineskip}\vspace*{-2ex}}
+  \def\unc@adjustchapterspacing{\vspace*{-\baselineskip}\vspace*{-0.5ex}}
+  \def\unc@adjustbibspacing{\relax}
+}
+
+\DeclareOption{nodraft}{\unc@nodraft}
+\DeclareOption{bottom}{\unc@bottom}
+\DeclareOption{draft}{\unc@draft} % timestamp each page
+
+\DeclareOption{nofront}{\unc@nofront} % condense front matter
+\DeclareOption{nolists}{\unc@nolists} % condense front matter
+
+\DeclareOption{narrow}{\unc@narrow}
+\DeclareOption{debug}{\thesisdebugmargins}
+
+% Set up margins [X. MARGINS]
+                        % These you can change
+\def\unc@pageheight  {11in}
+\def\unc@pagewidth   {8.5in}
+%\def\unc@leftmargin  {1.5in}
+\def\unc@leftmargin  {1.3125in}   % use 1 5/16'' margin -MCW
+%\def\unc@rightmargin {1in}
+\def\unc@rightmargin {1.0625in}   % use 1 1/16'' margin -MCW
+\def\unc@topmargin   {1in}
+%\def\unc@bottommargin{1in}
+\def\unc@bottommargin{1.0625in}   % use 1 1/16'' margin -MCW
+
+\def\unc@narrow{%
+\typeout{(Using slightly narrow margins for mpar)}
+\def\unc@pageheight  {11in}
+\def\unc@pagewidth   {8.5in}
+\def\unc@leftmargin  {1.75in}
+\def\unc@rightmargin {1.5in}
+\def\unc@topmargin   {1in}
+\def\unc@bottommargin{1in}
+\unc@setmargins
+}
+
+\def\unc@setmargins{%
+                        % Don't change these
+\headheight 2ex
+\headsep .5in                 % [XII. PAGINATION]
+\footskip .5in                % [XII. PAGINATION]
+\advance\footskip 1ex
+%  \parindent 5em                % [XI. SPACING AND INDENTATION]
+
+%% textheight = unc@pageheight - unc@topmargin - unc@bottommargin - extra
+\textheight\unc@pageheight
+\advance\textheight -\unc@topmargin
+\advance\textheight -\unc@bottommargin
+\advance\textheight -\headheight
+%  \advance\textheight -\headsep
+\advance\textheight -1ex        %extra footskip
+%  \advance\textheight -\footskip
+
+%% topmargin = unc@topmargin - 1in - voffset
+\topmargin\unc@topmargin
+\advance\topmargin -1in
+\advance\topmargin -\voffset
+\advance\topmargin -\headsep
+%  \advance\topmargin \headheight
+
+%% textwidth = unc@pagewidth - unc@leftmargin - unc@rightmargin
+\textwidth\unc@pagewidth
+\advance\textwidth -\unc@leftmargin
+\advance\textwidth -\unc@rightmargin
+
+%% oddsidemargin = unc@leftmargin - 1in - hoffset
+\oddsidemargin\unc@leftmargin
+\advance\oddsidemargin -1in
+\advance\oddsidemargin -\hoffset
+\if@twoside
+\evensidemargin\unc@rightmargin
+\advance\evensidemargin -1in
+\advance\evensidemargin -\hoffset
+\else
+\evensidemargin\oddsidemargin
+\fi
+
+\marginparwidth\oddsidemargin
+\advance\marginparwidth -\marginparsep
+}
+
+\def\thesisdebugmargins{%
+\typeout{Margins (in inches):}
+\newcount\unc@tmp
+\newcount\unc@inches
+\newcount\unc@hundredths
+\def\unc@convert##1{%
+\unc@tmp=\csname ##1\endcsname
+\unc@inches=\unc@tmp
+\divide \unc@inches by 65536
+\divide \unc@inches by 72
+\divide \unc@tmp by 47186     % hundreths
+\unc@hundredths=-\unc@inches
+\multiply\unc@hundredths 100
+\advance\unc@hundredths \unc@tmp
+\typeout{ ##1 = \the\unc@inches .\two@digits{\the\unc@hundredths}}
+}
+\unc@convert{textheight}
+\unc@convert{topmargin}
+\unc@convert{headheight}
+\unc@convert{headsep}
+\unc@convert{voffset}
+\unc@convert{footskip}
+\unc@convert{textwidth}
+\unc@convert{oddsidemargin}
+\unc@convert{evensidemargin}
+\unc@convert{hoffset}
+\unc@convert{marginparwidth}
+\unc@convert{marginparsep}
+}
+
+
+% Defaults
+
+\newcommand{\unc@draftnote}{}
+
+\def\thesistype#1{\gdef\unc@type{#1}}
+% \gdef\unc@type{Dissertation}
+
+\def\thesisuniversity#1{\gdef\unc@university{#1}}
+% \gdef\unc@university{The University of North Carolina at Chapel Hill}
+
+% 2002 - supposed to be lower case.  TCH
+\gdef\unc@type{dissertation} \gdef\unc@university{the University of North
+Carolina at Chapel Hill}
+
+\def\thesisdegree#1{\gdef\unc@degree{#1}}
+\gdef\unc@degree{Doctor of Philosophy}
+
+\def\thesisdepartment#1{\gdef\unc@department{#1}}
+\gdef\unc@department{Department of Biostatistics}
+
+\def\thesislocation#1{\gdef\unc@location{#1}}
+\gdef\unc@location{Chapel Hill}
+
+\def\thesisyear#1{\gdef\unc@year{#1}}
+\gdef\unc@year{\the\year}
+
+\def\thesistitle#1{\gdef\unc@title{#1}}
+\gdef\unc@title{Title}
+
+
+\def\thesisauthor#1{\gdef\unc@author{#1}\gdef\unc@AUTHOR{\uppercase{#1}}}
+\gdef\unc@author{Author}
+\gdef\unc@AUTHOR{AUTHOR}
+
+\def\thesisadvisortitle#1{\gdef\unc@advisortitle{#1}}
+\gdef\unc@advisortitle{}%DML 08/28/2012
+%\gdef\unc@advisortitle{Advisor}
+%\def\thesisadvisora#1{\gdef\unc@advisora{#1}}
+%\gdef\unc@advisora{Advisor}
+\def\thesisadvisora#1{\gdef\unc@advisora{#1}}
+\def\thesisadvisorb#1{\gdef\unc@advisorb{#1}}
+
+%\def\thesisreadertitle#1{\gdef\unc@readertitle{#1}}
+%\gdef\unc@readertitle{Reader}
+%\def\thesisreadera#1{\gdef\unc@readera{#1}}
+%\def\thesisreaderb#1{\gdef\unc@readerb{#1}}
+%\def\thesisreaderc#1{\gdef\unc@readerc{#1}}
+%\def\thesisreaderd#1{\gdef\unc@readerd{#1}}
+%\def\thesisreadere#1{\gdef\unc@readere{#1}}
+%\def\thesisreaderf#1{\gdef\unc@readerf{#1}}
+%\def\thesisreaderg#1{\gdef\unc@readerg{#1}}
+
+\def\thesismembertitle#1{\gdef\unc@membertitle{#1}}
+\gdef\unc@membertitle{}%DML 08/28/2012
+%\gdef\unc@membertitle{Member}
+\def\thesismembera#1{\gdef\unc@membera{#1}}
+\def\thesismemberb#1{\gdef\unc@memberb{#1}}
+\def\thesismemberc#1{\gdef\unc@memberc{#1}}
+\def\thesismemberd#1{\gdef\unc@memberd{#1}}
+
+% title should be 10,11, or 12 pt and bold -NHyun 5/20/2014
+\def\thesistitlefont#1{\gdef\unc@titlefont{#1}}
+\gdef\unc@titlefont{\normalsize\bfseries}
+% author font should be 12 pt.    -MCW 5/22/03
+\def\thesisauthorfont#1{\gdef\unc@authorfont{#1}}
+\ifthenelse{\@ptsize=0}{\gdef\unc@authorfont{\normalsize}}{}
+\ifthenelse{\@ptsize=1}{\gdef\unc@authorfont{\normalsize}}{}
+\ifthenelse{\@ptsize=2}{\gdef\unc@authorfont{}}{}
+% titlepage font should be 12 pt.    -MCW 5/22/03
+% (as specified by margin lady Sue)
+\def\thesistitlepagefont#1{\gdef\unc@titlepagefont{#1}}
+\ifthenelse{\@ptsize=0}{\gdef\unc@titlepagefont{\normalsize}}{}
+\ifthenelse{\@ptsize=1}{\gdef\unc@titlepagefont{\normalsize}}{}
+\ifthenelse{\@ptsize=2}{\gdef\unc@titlepagefont{}}{}
+
+% Macros
+
+% 5/20/2003 changes by MCW
+%      - Title and and "by" author should be single-spaced
+%      - 1 inch between title and "by" (according to sample title page
+%      in grad school dissertation guidelines document)
+%      - 1 inch between author and statement
+%      - single-space between "Chapel Hill" and year
+\def\thesismaketitle{
+  \pagenumbering{roman}\setcounter{page}{1}\thispagestyle{empty}
+  \begin{spacing}{1}\reset@font
+% To be exactly 2 in from top of page on hplj146 with 11 pt base font
+    %\vspace*{0.96875 in}
+    % changed by RYang for 12pt font
+    \vspace*{0.9in}
+    \begin{center}
+      \begin{spacing}{1}
+        {\unc@titlefont\unc@adjusttitlespacing\MakeUppercase{\unc@title}}
+      \end{spacing}
+%      \vspace{1 in}
+% To be exactly 1 in from name with 11 pt base font
+    \vspace{0.96875 in}
+% Use title page font for everything on the title page except the title
+%Changed by David Gotz.  The 2004-2005 Guide to Theses and Dissertations does not include the word "by"
+%:       
+	%{\unc@titlepagefont } \\ 	%DML 08/28/2012
+		%{\unc@titlepagefont by} \\
+      	{\unc@titlepagefont \unc@author}
+    \end{center}
+% To be exactly 1 in from name with 11 pt base font
+     \vspace{0.875 in}       
+    {\begin{center} \unc@titlepagefont A \unc@type{} submitted to the faculty of
+    \unc@university{} in partial fulfillment of the requirements for the
+    degree of \unc@degree{} in the \unc@department{} in the Gillings School of Global Public Health.
+    \end{center}}
+    
+% To fit with 6 signature lines
+    \vspace{.8in} %% PKE 3/29/07: CHANGED FROM .2 TO .9in
+    \begin{center}
+      {\unc@titlepagefont \unc@location} \\
+      {\unc@titlepagefont \unc@year} \\
+% To fit with 6 signature lines
+      \vspace{1in}
+     \hfill\unc@signatures
+    \end{center}
+  \end{spacing}
+  \newpage
+  }
+
+%\def\unc@signatureline#1#2{\vspace{0.5in}\hbox to 3in{\hfil\shortstack{\vrule
+% change made to fit 6 signature lines -MCW  5/5/03
+\def\unc@signatureline#1#2{\vspace{0.35in}\hbox to 3in{\hfil\shortstack{\vrule
+      width 3in height 0.0pt\\{\unc@titlepagefont #1, #2}}}}
+
+%% %% PKE 3/30/07: NOTE: SPRING, 2007 UNC WOULD NOT ACCEPT W/ SIGNATURE LINES. FOLLOWING
+%% %% CHANGES MADE TO ELIMINATE SIGNATURE LINES
+
+\def\unc@signatures{
+  \begin{minipage}{2.1in}    %DML 08/28/2012                                           %% PKE 3/30/07: CHANGED 3in to 3.1in
+ % \begin{minipage}{2.5in}                                               %% PKE 3/30/07: CHANGED 3in to 3.1in
+% ``Approved by:'' should be centered  -MCW 5/20/03
+    
+    \begin{flushleft}{\unc@titlepagefont Approved by:}\end{flushleft}
+%{\unc@titlepagefont Approved by:}
+%\vspace{.1in}								%% PKE 3/30/07: ADDED LINE
+\doublespacing
+    \@ifundefined{unc@advisora}{}%
+{\unc@advisora} {\unc@advisortitle}\\  %% PKE 3/30/07: ADDED LINE DML removed comma
+%    \@ifundefined{unc@advisorb}{}%
+%{\unc@advisorb} {\unc@advisortitle}\\  %% PKE 3/30/07: ADDED LINE DML removed comma
+%       {\unc@signatureline{\unc@advisora}{\unc@advisortitle}}		%% PKE 3/30/07: DELETED LINE
+%    \@ifundefined{unc@advisorb}{}%					%% PKE 3/30/07: DELETED LINE
+%	\begin{center}{\unc@advisorb}, {\unc@advisortitle}\end{center}  %% PKE 3/30/07: ADDED LINE
+%       {\unc@signatureline{\unc@advisorb}{\unc@advisortitle}}          %% PKE 3/30/07: DELETED LINE
+%    \@ifundefined{unc@readera}{}%
+%	\begin{center}{\unc@readera}, {\unc@readertitle}\end{center}    %% PKE 3/30/07: ADDED LINE
+%       {\unc@signatureline{\unc@readera}{\unc@readertitle}}            %% PKE 3/30/07: DELETED LINE
+%    \@ifundefined{unc@readerb}{}%
+%	\begin{center}{\unc@readerb}, {\unc@readertitle}\end{center}    %% PKE 3/30/07: ADDED LINE
+%       {\unc@signatureline{\unc@readerb}{\unc@readertitle}}            %% PKE 3/30/07: DELETED LINE
+%    \@ifundefined{unc@readerc}{}%
+%	\begin{center}{\unc@readerc}, {\unc@readertitle}\end{center}    %% PKE 3/30/07: ADDED LINE
+%       {\unc@signatureline{\unc@readerc}{\unc@readertitle}}            %% PKE 3/30/07: DELETED LINE
+%    \@ifundefined{unc@readerd}{}%
+%       {\unc@signatureline{\unc@readerd}{\unc@readertitle}}
+%    \@ifundefined{unc@readere}{}%
+%       {\unc@signatureline{\unc@readere}{\unc@readertitle}}
+%    \@ifundefined{unc@readerf}{}%
+%       {\unc@signatureline{\unc@readerf}{\unc@readertitle}}
+%    \@ifundefined{unc@readerg}{}%
+%       {\unc@signatureline{\unc@readerg}{\unc@readertitle}}
+%       \@ifundefined{unc@membera}{}%
+%{\unc@membera}, {\unc@membertitle}  %% PKE 3/30/07: ADDED LINE
+       \@ifundefined{unc@membera}{}%
+ {\unc@membera} {\unc@membertitle}  \\ %% PKE 3/30/07: ADDED LINE
+   %  {\unc@signatureline{\unc@membera}{\unc@membertitle}}            %% PKE 3/30/07: DELETED LINE
+        \@ifundefined{unc@memberb}{}%
+ {\unc@memberb} {\unc@membertitle}\\  %% PKE 3/30/07: ADDED LINE
+%     {\unc@signatureline{\unc@memberb}{\unc@membertitle}}            %% PKE 3/30/07: DELETED LINE
+          \@ifundefined{unc@memberc}{}%
+{\unc@memberc} {\unc@membertitle}\\ %% PKE 3/30/07: ADDED LINE
+		  \@ifundefined{unc@memberd}{}%
+  {\unc@memberd} {\unc@membertitle}\\ %% PKE 3/30/07: ADDED LINE
+  %    {\unc@signatureline{\unc@memberc}{\unc@membertitle}} 
+  %        \@ifundefined{unc@memberd}{}%
+%{\unc@memberd} {\unc@membertitle}  %% PKE 3/30/07: ADDED LINE
+  %    {\unc@signatureline{\unc@memberd}{\unc@membertitle}} 
+  \end{minipage}
+  }
+
+% 2002 - ALL RIGHTS RESERVED supposed to be uppercase - TCH
+\def\thesismakecopyright{
+  % Added following line by JCK to make start on right-hand side
+%Changed by David Gotz.  The 2004-2005 Guide to Theses and Dissertations states that the copyright should be
+%on page 'ii', immediately following the title page.
+  % \cleardoublepage
+  \thispagestyle{plain}
+  \mbox{}\vfill
+  \begin{spacing}{1.1}
+    \begin{center}
+% If using copyright symbol, don't need the word "Copyright" -MCW 5/21/03
+%      Copyright \copyright{} \unc@year \\
+      \copyright{} \unc@year \\
+      \unc@author \\
+      ALL RIGHTS RESERVED
+    \end{center}
+  \end{spacing}
+  \newpage
+  }
+
+\def\unc@nofront{
+  \def\thesismaketitle{
+    \pagenumbering{roman}\setcounter{page}{1}\thispagestyle{empty}
+    \begin{spacing}{1}\reset@font
+      \vspace*{1in}
+      \begin{center}
+        \begin{spacing}{2}
+          {\unc@titlefont\unc@adjusttitlespacing\unc@title}
+        \end{spacing}
+        \vspace{0.5in}
+        {\unc@authorfont by} \\
+        \vspace{0.5in}
+        {\unc@authorfont \unc@author}
+      \end{center}
+      \vspace{0.5in}
+      \begin{center}\unc@draftnote\end{center}
+    \end{spacing}
+    }
+  \def\thesismakecopyright{}%
+  \excludecomment{dedication}%
+  \excludecomment{acknowledgments}%
+  \renewenvironment{abstract}{%
+    \global\@topnum\z@
+    \@afterindentfalse
+    \begin{center}\bfseries
+      \vspace{0.5in} \abstractname
+    \end{center}%
+    \quotation}{\endquotation\newpage}%
+  }
+
+\def\unc@nolists{%
+  \renewcommand{\listofabbreviations}{}%
+  \renewcommand{\listoffigures}{}%
+  \renewcommand{\listoftables}{}%
+  \renewcommand{\dedicate}{}%
+  \renewcommand{\apendix}{}%
+  \renewcommand{\acknow}{}%
+  }
+
+\def\unc@draft{%
+  \renewcommand{\ps@plain}{%
+    \renewcommand{\@oddhead}{\hfil\textrm{\thepage}}%
+    \renewcommand{\@evenhead}{\textrm{\thepage}\hfil}%
+% Added Feb 2003 by MCW -- adds initials to draft footer
+    \@ifundefined{unc@authorinit}{
+       \renewcommand{\@oddfoot}{\hfil Draft of \unc@timestamp}
+       \renewcommand{\@evenfoot}{Draft of \unc@timestamp\hfil \unc@authorinit}
+    } {
+       \renewcommand{\@oddfoot}{\unc@authorinit \hfil Draft of \unc@timestamp}
+       \renewcommand{\@evenfoot}{Draft of \unc@timestamp\hfil}
+    }
+    }%
+  \renewcommand{\unc@draftnote}{\emph{\bf (Draft of \unc@timestamp)}}
+  }
+
+\def\unc@mydraft{%
+  \renewcommand{\ps@plain}{%
+    \renewcommand{\@oddhead}{\hfil\textrm{\thepage}}%
+    \renewcommand{\@evenhead}{\textrm{\thepage}\hfil}%
+    \renewcommand{\@oddfoot}{\hfil Draft of \unc@timestamp}%
+    \renewcommand{\@evenfoot}{Draft of \unc@timestamp\hfil}%
+    }%
+  \renewcommand{\unc@draftnote}{\emph{\bf (Draft of \unc@timestamp)}}
+  }
+
+\def\unc@nodraft{%
+  \renewcommand{\ps@plain}{%
+%    \renewcommand{\@oddhead}{\hfil\textrm{\thepage}}%    THESE FOUR LINES
+%    \renewcommand{\@evenhead}{\textrm{\thepage}\hfil}%   SHOULD BE USED FOR
+%    \renewcommand{\@oddfoot}{}%                          PAGE NUMBERS AT THE
+%    \renewcommand{\@evenfoot}{}%                         TOP, ALIGNED TO THE SIDE
+% David Gotz: These next four lines create centered page numbers at the bottom.
+    \renewcommand{\@oddhead}{}%
+    \renewcommand{\@evenhead}{}%
+    \renewcommand{\@oddfoot}{\hfil\textrm{\thepage}\hfil}%
+    \renewcommand{\@evenfoot}{\hfil\textrm{\thepage}\hfil}%
+    \let\@mkboth\@gobbletwo%
+    }%
+  }
+
+\def\unc@bottom{%
+  \renewcommand{\ps@plain}{%
+    \renewcommand{\@oddhead}{}%
+    \renewcommand{\@evenhead}{}%
+    \renewcommand{\@oddfoot}{\hfil\textrm{\thepage}\hfil}%
+    \renewcommand{\@evenfoot}{\hfil\textrm{\thepage}\hfil}%
+    \let\@mkboth\@gobbletwo%
+    }%
+  }
+
+\newcount\unc@hour
+\newcount\unc@minute
+
+\unc@hour=\time
+\divide\unc@hour 60
+\unc@minute=-\unc@hour
+\multiply\unc@minute 60
+\advance\unc@minute \time
+
+\def\unc@timestamp{\today{} at
+  \two@digits{\the\unc@hour}:\two@digits{\the\unc@minute}}
+
+% Added Feb 2003 by MCW -- adds initials to draft footer
+\def\authorinit#1{\gdef\unc@authorinit{#1}}
+
+%% Redefine a bunch of stuff...
+
+% Added by David Gotz
+% The 2004-2005 guide specifies that these headings should be in all caps.
+\renewcommand{\abstractname}{{ ABSTRACT}} %% PKE 3/29/07: CHANGED {ABSTRACT} to {Abstract}
+\newcommand{\acknowledgmentsname}{{ACKNOWLEDGMENTS}} %%NHYUN 5/21/2014:CHANGED TO ALL CAPS
+\renewcommand{\contentsname}{\normalsize \hskip 2.0in \bf \uppercase{Table of Contents}}
+\renewcommand{\listtablename}{\normalsize \hskip 2.2in  \bf \uppercase{List of Tables} }
+\renewcommand{\listfigurename}{\normalsize \hskip 2.2in \bf \uppercase{List of Figures}}
+%\renewcommand{\contentsname}{TABLE OF CONTENTS}      %%NHYUN 5/21/2014:CHANGED TO ALL CAPS  
+%\renewcommand{\listtablename}{LIST OF TABLES}        %%NHYUN 5/21/2014:CHANGED TO ALL CAPS
+%\renewcommand{\listfigurename}{LIST OF FIGURES}      %%NHYUN 5/21/2014:CHANGED TO ALL CAPS
+%\renewcommand{\bibname}{\normalsize \hskip 2.0in  \uppercase{BIBLIOGRAPHY} \vskip 0in}                 %%NHYUN 5/21/2014:CHANGED TO ALL CAPS
+\renewcommand{\chaptertitlename}{CHAPTER}               %%NHYUN 5/21/2014:CHANGED TO ALL CAPS
+
+% 2002 - ABSTRACT first, then author: title
+\renewenvironment{abstract}{%
+  %\clearpage\thispagestyle{plain}
+  % Modified to following line by JCK to make start on right-hand side
+  \cleardoublepage\thispagestyle{plain}
+  \global\@topnum\z@
+  %\chapter*{\abstractname}{} %% PKE 3/29/07: ADDED THIS LINE DML REMOVED
+  \@afterindentfalse\reset@font
+  %\begin{spacing}{1}\vspace*{1.13in}\begin{center}\bfseries
+  \begin{spacing}{1}  \vspace*{1.35in}\begin{center}\bfseries %% NHYUN 5/19/2014: CHANGED INTO 2 IN
+    \unc@adjustabstractspacing 
+    \abstractname %% PKE 3/29/07: DELETED THIS LINE
+    \begin{spacing}{1}\vspace*{4ex}\end{spacing}   
+      \uppercase{\unc@AUTHOR}:
+    \unc@title \\ (Under the direction of
+    \@ifundefined{unc@advisorb}%
+       {\unc@advisora}{\unc@advisora{} and \unc@advisorb}) 
+   \\
+%    \vspace{0.5in} \abstractname
+  \end{center}\end{spacing}
+  }{\vfill\newpage}
+
+\newenvironment{dedication}%
+  {\cleardoublepage\thispagestyle{plain}\global\@topnum\z@\@afterindentfalse\begin{spacing}{1}\vspace*{1.55cm}\end{spacing}}%
+
+  {\newpage}
+
+% 2002 - ACKNOWLEDGMENTS in upper case - TCH
+%\newcommand{\acknowledgmentsname}{ACKNOWLEDGMENTS}
+%\renewcommand{\acknowledgmentsname}{\chapter*{ACKNOWLEDGMENTS}
+\newenvironment{acknowledgments}{%
+  %\clearpage\thispagestyle{plain}
+  % Modified to following line by JCK to make start on right-hand side
+  \cleardoublepage\thispagestyle{plain}
+  \global\@topnum\z@
+  \@afterindentfalse\reset@font
+  \begin{spacing}{1}\vspace*{0.80in}\begin{center}\bfseries
+  %\begin{spacing}{1}\vspace*{1.35in}\begin{center}\bfseries %% NHYUN 5/19/2014: CHANGED INTO 2 IN
+   \acknowledgmentsname %% PKE 3/29/07: DELETED THIS LINE
+  \\
+  \end{center}\end{spacing}%
+  }{\vfill\newpage}
+
+
+\newcommand{\colophonname}{Colophon}
+\newenvironment{colophon}{\chapter*{\colophonname}}{}
+
+\newcommand{\glossaryname}{Glossary}
+\renewenvironment{glossary}{\chapter*{\glossaryname}}{}
+\def\unc@first{0}
+
+
+
+
+
+%%% ADD dot leaders for chapter-------------------------------  SHANKAR
+% Add dotted leaders for chapters in the table of contents.
+\renewcommand{\l@chapter}[2]{\hangindent=1.5em \pagebreak[3]\vskip 1em plus 1bp
+\parindent \z@ \rightskip \@pnumwidth 
+\parfillskip -\@pnumwidth 
+\interlinepenalty\@M\leavevmode 
+\@tempdima 1.5em\relax \begingroup 
+    \textbf{#1}\leaders\hbox{$\m@th \mkern \@dotsep mu.\mkern \@dotsep mu$}% \hfill 
+\hskip 0pt plus 1fill  % new line
+   \hbox to\@pnumwidth{\hfil\rm #2}\endgroup\par}
+
+
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+ -.2ex}{2.3ex plus .2ex}{\normalsize\bfseries}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+ -.2ex}{1.5ex plus .2ex}{\normalsize\bfseries}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
+ -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bfseries}}
+\let\paragraph=\subsubsection
+%%%%%%%%%%%%%%
+
+
+% START ABBREVIATION SUPPORT
+\def\xspace{\futurelet\next\@xspace}
+\def\@xspace{%
+  \ifx\next\bgroup\else
+  \ifx\next\egroup\else
+  \ifx\next\/\else
+  \ifx\next\ \else
+  \ifx\next~\else
+  \ifx\next.\else
+  \ifx\next,\else
+  \ifx\next:\else
+  \ifx\next;\else
+  \ifx\next?\else
+  \ifx\next'\else
+  \ifx\next)\else
+  \ifx\next-\else
+  \space
+  \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi%
+  }
+
+\def\abbreviation#1#2#3{%
+  \unc@addabbreviation{#2}{#3}
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\abbreviationfinal{#1}{#2}\empty%
+    #3 (#1)\xspace}
+  \else\gdef#1{#2\protect\xspace}%
+  \fi
+  }
+
+\def\abbreviationfinal#1#2#3{%
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\abbreviationfinal{#1}{#2}\empty%
+    #3 (#1)\xspace}
+  \else\gdef#1{#2\protect\xspace}%
+  \fi
+  }
+
+\def\abbreviationr#1#2#3{%
+  \unc@addabbreviation{#2}{#3}
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\abbreviationrfinal{#1}{#2}\empty%
+    #1 (#3)\xspace}
+  \else\gdef#1{#2\protect\xspace}%
+  \fi
+  }
+
+\def\abbreviationrfinal#1#2#3{%
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\abbreviationrfinal{#1}{#2}\empty%
+    #1 (#3)\xspace}
+  \else\gdef#1{#2\protect\xspace}%
+  \fi
+  }
+
+\def\unc@addabbreviation#1#2{%
+  \protected@write\@auxout
+  {\let\label\@gobble \let\index\@gobble \let\glossary\@gobble}%
+  {\string\@writefile{loa}{\protect\abbreviationline{#1}{#2}}}%
+  \typeout{\protect #1 #2}
+  }
+
+\def\abbreviationline#1#2{\makebox[1in][l]{\textbf{#1}} #2\newline}
+%\def\listabbreviationname{List of Abbreviations}
+% David Gotz changed this to be in all capitols.
+\def\listabbreviationname{LIST OF ABBREVIATIONS}
+\newcommand{\listofabbreviations}{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\listabbreviationname
+      \@mkboth{\uppercase{\listabbreviationname}}%
+              {\uppercase{\listabbreviationname}}}%
+    \@starttoc{loa}%
+    \if@restonecol\twocolumn\fi
+    }
+
+\def\trademark#1#2#3{%
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\trademark{#1}{#2}\empty%
+    #1{}\footnote{\rm #2 is a trademark of #3.}\xspace}%
+  \else\gdef#1{#2\xspace}%
+  \fi
+  }
+
+\def\regtrademark#1#2#3{%
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\regtrademark{#1}{#2}\empty%
+    #1{}\footnote{#2 is a trademark of #3.}\xspace}%
+  \else\gdef#1{#2\xspace}%
+  \fi
+  }
+
+\def\regtrademarkfull#1#2#3{%
+  \def#1{\relax}%
+  \setbox0=\hbox{#3}%
+  \ifdim\wd0>0pt\gdef#1{\regtrademarkfull{#1}{#2}\empty%
+    #1{}\footnote{#3}\xspace}%
+  \else\gdef#1{#2\xspace}%
+  \fi
+  }
+% END ABBREVIATION SUPPORT
+
+\newlength{\@shortcaptionsize}
+
+% START OF SHORT CAPTION SUPPORT FOR SIDEWAYS FIGURES
+\def\shortcaption{\refstepcounter\@captype \@dblarg{\@shortcaption\@captype}}
+\long\def\@shortcaption#1[#2]#3{\par\addcontentsline{\csname
+  ext@#1\endcsname}{#1}{\protect\numberline{\csname
+  the#1\endcsname}{\ignorespaces #2}}\begingroup
+    \@parboxrestore
+    \normalsize
+    \@makeshortcaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+  \endgroup}
+\long\def\@makeshortcaption#1#2{%
+  \vskip\abovecaptionskip
+  \setlength{\@shortcaptionsize}{.75\hsize}%
+  \sbox\@tempboxa{#1: #2}%
+  \ifdim \wd\@tempboxa >\@shortcaptionsize
+    \hbox to\hsize{\hfil\parbox[t]{\@shortcaptionsize}{#1: #2}\hfil}
+  \else
+    \global \@minipagefalse
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+%ADDED DML to have multiple appendicies
+\newcommand*\chapterlabel{}
+
+%\titleclass{\append}{top}[\chapter]
+%  \titleformat{\append}[display]{\gdef\chapterlabel{}\vspace{-2cm}\normalfont\bfseries\filcenter}
+%  {\setcounter{chapter}{\roman}\renewcommand{\chaptername}{Appendix}\gdef\chapterlabel{\theappend\ }}{20pt}{{\huge \chapterlabel#1}\addcontentsline{toc}{chapter}{\chapterlabel#1}}
+%  \titlespacing{\append}{0pt}{*4}{*1.5}
+ 
+\def\newcenter{\trivlist \centering\item\relax}
+\def\endnewcenter{\endtrivlist} 
+
+\newcommand{\refname}{\bf\normalsize BIBLIOGRAPHY} 
+  
+\newcommand{\append}[2]{
+	\par\vspace*{-7ex}
+	%%\par{\begin{center}\huge\bfseries\textsc{Appendix #1}\end{center}}
+	%\par{\begin{center}\Large\bfseries\singlespace\textsc{#2}\end{center}}
+	\par{\begin{center}\bfseries\textsc{APPENDIX #1: #2}\end{center}}
+	%\par{\begin{center} \bfseries\singlespace\textsc{#2}\end{center}}	
+	%\par{ \bfseries\singlespace\textsc{#2}}	
+	\addcontentsline{toc}{chapter}{Appendix #1: #2}		  
+	%\par\vspace*{1ex}
+}
+
+%\let\bibsection\relax
+%\def\bibsection{\section*{BIBLIOGRAPHY}}
+%\def\bibsection{\section*{References}}
+  
+% END OF SHORT CAPTION SUPPORT FOR SIDEWAYS FIGURES
+
+\ExecuteOptions{nodraft}
+\unc@setmargins
+\ProcessOptions
+\AtBeginDocument{\pagestyle{plain}}
