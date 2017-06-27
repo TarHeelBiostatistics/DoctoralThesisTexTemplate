@@ -9,6 +9,8 @@ output:
     fig_caption: true
     latex_engine: pdflatex
     template: UNC_thesis_template.tex
+    includes: 
+      in_header: example_header_include.tex
 bibliography: example.bib
 ---
 
@@ -21,6 +23,12 @@ knitr::opts_chunk$set(echo = TRUE)
 This is an example thesis .Rmd template, which, when compiled, uses the `UNC_thesis_template.tex` file to create both a `.tex` file and a `.pdf` file.
 
 NOTE: `UNC_thesis_template.tex` is under development and does NOT (yet) meet the UNC graduate school guidelines.
+
+You can put custom definitions in a file to be included in the .tex header. For example, putting 
+```
+\def\cA{{\mathcal{A}}} 
+```
+in `example_header_include.tex`  allow you to type `\cA` in the text which, when compiled, yields: $\cA$. Change the filename as necessary but be sure to update the filename in the YAML header.
 
 # Chapter 2
 
