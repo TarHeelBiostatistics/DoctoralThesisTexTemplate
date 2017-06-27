@@ -6,9 +6,64 @@
 % NO GUARANTEES THIS TEMPLATE CONFORMS TO CURRENT, PAST, OR FUTURE UNC STANDARDS
 
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-$if(beamerarticle)$
-\usepackage{beamerarticle} % needs to be loaded first
-$endif$
+
+\usepackage{UNC_thesis}      %UNC BIOSTAT Thesis Style: modified by Noorie Hyun in May 2014
+
+\author{$author.first$ $author.last$}
+
+
+%*********************************************** USEPACKAGE SECTION *******************************
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage{moresize}
+\usepackage{indentfirst} 
+%\usepackage{MnSymbol}
+\usepackage{amssymb,amsmath,amsfonts,amsthm,latexsym,amscd,amsxtra}
+\usepackage[active]{srcltx}
+\usepackage{amstext}
+\usepackage{amsgen}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage{esint}
+\usepackage{appendix}
+\usepackage{mathrsfs}
+%\usepackage{mathtools}
+\usepackage[round]{natbib}
+\usepackage{lscape}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{epstopdf}   %eps file to pdf (for image files)
+\usepackage[dvips]{epsfig}
+\usepackage{float}
+\usepackage{hhline}     % this is for my tables -SBL
+\usepackage{subfigure}  % use for side-by-side figures
+\usepackage{booktabs}   % for table
+\usepackage{multirow}   % for table
+\usepackage[figuresright]{rotating}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{bm}
+\usepackage{threeparttable}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{color}      % use if color is used in text
+\usepackage[subfigure]{tocloft}  % use for side-by-side figures
+\usepackage{subfigure}
+\usepackage{booktabs}   % for table
+\usepackage{multirow}   % for table
+\usepackage[figuresright]{rotating}
+\usepackage{tabularx}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec} %05/22/14: NHyun added this to make the font size of the chapter headings not that large!
+\usepackage{titletoc} %05/22/14 NHyun added this to fix the appendix tables in Table of Contents
+%\usepackage[nolists,nomarkers]{endfloat} %excluded to contain landscape tables
+
+%\usepackage[justification=centering]{caption}[2008/04/01]
+\usepackage[]{caption}[2008/04/01]
+
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
@@ -80,7 +135,7 @@ $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
-\usepackage[unicode=true]{hyperref}
+%\usepackage[unicode=true]{hyperref}
 $if(colorlinks)$
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 $endif$
@@ -224,28 +279,64 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
-$if(title)$
-\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
-$endif$
-$if(subtitle)$
-\providecommand{\subtitle}[1]{}
-\subtitle{$subtitle$}
-$endif$
-$if(author)$
-\author{$for(author)$$author$$sep$ \and $endfor$}
-$endif$
-$if(institute)$
-\providecommand{\institute}[1]{}
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$endif$
-\date{$date$}
+%$if(title)$
+%\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+%$endif$
+%$if(subtitle)$
+%\providecommand{\subtitle}[1]{}
+%\subtitle{$subtitle$}
+%$endif$
+%$if(author)$
+%\author{$for(author)$$author$$sep$ \and $endfor$}
+%$endif$
+%$if(institute)$
+%\providecommand{\institute}[1]{}
+%\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+%$endif$
+%\date{$date$}
 
 \begin{document}
+
 $if(title)$
-\maketitle
+\thesistitle{$title$}
 $endif$
+
+\thesisauthor{$author.first$ $if(author.middle)$$author.middle$$endif$ $author.last$}
+
+$if(author.committee.advisora)$
+\thesisadvisora{$author.committee.advisora$} 
+$endif$
+
+$if(author.committee.advisorb)$
+\thesisadvisorb{$author.committee.advisorb$} 
+$endif$
+
+$if(author.committee.membera)$
+\thesismembera{$author.committee.membera$} 
+$endif$
+
+$if(author.committee.memberb)$
+\thesismemberb{$author.committee.memberb$} 
+$endif$
+
+$if(author.committee.memberc)$
+\thesismemberc{$author.committee.memberc$} 
+$endif$
+
+$if(author.committee.memberd)$
+\thesismemberd{$author.committee.memberd$} 
+$endif$
+
+\thesismaketitle 
+\thesismakecopyright
+
+
+\addtolength{\headsep}{-0.1875in} % pull top margin up 3/16 inch--R. Yang, June 2003
+\doublespace
+
 $if(abstract)$
 \begin{abstract}
+\vspace{1pc}
 $abstract$
 \end{abstract}
 $endif$
@@ -254,25 +345,92 @@ $for(include-before)$
 $include-before$
 
 $endfor$
-$if(toc)$
-{
-$if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
-$endif$
-\setcounter{tocdepth}{$toc-depth$}
-\tableofcontents
-}
-$endif$
-$if(lot)$
-\listoftables
-$endif$
-$if(lof)$
-\listoffigures
-$endif$
-$body$
 
+
+
+%---------------------------------------TABLE OF CONTENTS ---------------------%
+$if(toc)$
+\clearpage
+%\doublespace
+\begin{spacing}{1}
+\setlength{\cftbeforechapskip}{0.3cm}
+\setlength{\cftbeforesecskip}{0.3cm}
+\setlength{\cftbeforesubsecskip}{0.3cm}
+\setlength{\cftbeforefigskip}{0.2cm}
+\setlength{\cftbeforetabskip}{0.3cm}
+%\setlength\cftaftertoctitleskip{0.2cm} %NB added these on 11/07/13
+%\setlength\cftafterlottitleskip{0.2cm} %NB added these on 11/07/13
+%\setlength\cftafterloftitleskip{0.2cm} %NB added these on 11/07/13
+%the above 3 commands are important to reduce the spacing between the titles 
+%(TOC, LOF, and lOT) and subsequent text to about 1 double spaced line 
+%
+\setlength\parskip{\baselineskip}
+{\normalsize
+
+\tableofcontents
+$endif$
+
+%--------------------------------- LIST OF TABLES------------------------------%
+$if(lot)$
+\begingroup
+\setlength\parskip{\baselineskip}
+\newpage
+ \vspace*{-1.5\baselineskip}
+	\titlespacing{\section}{12pt}{1em}{12pt}
+\addcontentsline{toc}{section}{\hskip -2 in \listtablename}
+\listoftables   
+
+\newpage
+\clearpage
+  \vspace*{-1.5\baselineskip}
+	\titlespacing{\section}{12pt}{1em}{12pt}%{12pt}{12pt}{12pt}
+\addcontentsline{toc}{section}{\hskip -2 in \listfigurename}
+\listoffigures  % if necessary
+\endgroup
+}
+\end{spacing}
+$endif$
+
+%-------------------------------CHAPTERS---------------------------------------%
+\begingroup
+\setlength\parskip{\baselineskip}
+\endgroup
+
+\begin{doublespace}
+\cleardoublepage % necessary to make arabic not spill backwards onto loa
+\pagenumbering{arabic}
+$body$
+\end{doublespace}
+
+%-------------------------------APPENDICES-------------------------------------%
+
+% TO DO: incorporate appendices into Rmd document
+
+
+%\appendix
+%\newcommand{\appchapter}[1]{\let\oldthechapter\thechapter
+%  \renewcommand{\thechapter}{Appendix A}  
+%  \section{#1}\let\thechapter\oldthechapter}
+
+%\newpage
+%\append{B}{Technical Details for Chapter 2}
+%\renewcommand{\thesection}{A.\arabic{section}}
+%%%%%input file here%%%%%
+%\input{Chp_2_appendix}	
+%%%%%input file here%%%%%
+%\nc
+
+
+
+%-------------------------------BIBLIOGRAPHY-----------------------------------%
+
+\newpage
+
+\begingroup
+\begin{singlespace}
 $if(natbib)$
 $if(bibliography)$
+\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}	
 $if(biblio-title)$
 $if(book-class)$
 \renewcommand\bibname{$biblio-title$}
@@ -292,4 +450,7 @@ $for(include-after)$
 $include-after$
 
 $endfor$
+
+\end{singlespace}
+\endgroup
 \end{document}
