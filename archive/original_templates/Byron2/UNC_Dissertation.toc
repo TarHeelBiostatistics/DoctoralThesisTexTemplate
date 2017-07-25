@@ -1,0 +1,10 @@
+\contentsline {chapter}{LIST OF TABLES}{vii}{section*.1}
+\contentsline {chapter}{LIST OF FIGURES}{viii}{section*.2}
+\contentsline {chapter}{LIST OF ABBREVIATIONS}{ix}{section*.3}
+\contentsline {chapter}{CHAPTER 1: LITERATURE REVIEW}{1}{chapter*.4}
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}
+\contentsline {chapter}{CHAPTER 2: JUST A FANTASTIC IDEA}{2}{chapter*.5}
+\contentsline {chapter}{CHAPTER 3: BUT HERE'S ANOTHER}{3}{chapter*.6}
+\contentsline {chapter}{CHAPTER 4: NOT SO SURE ABOUT THIS ONE}{4}{chapter*.7}
+\contentsline {chapter}{BIBLIOGRAPHY}{5}{section*.8}
+\contentsfinish 

@@ -1,0 +1,141 @@
+\documentclass[11pt,letterpaper,twoside]{report}
+
+% Layout
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[subfigure]{tocloft}
+\usepackage{mdframed}
+\usepackage{titletoc}
+
+
+% Citation style
+\usepackage{natbib}
+\usepackage{apalike}
+
+% include citations inline
+\usepackage{bibentry}
+\nobibliography*
+
+% Figures
+\usepackage{subfigure}
+\usepackage{epsfig}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{listings}
+
+% Math
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Typography
+\usepackage{times}
+\usepackage{microtype}
+\usepackage{textcomp}
+
+% Macro support
+\usepackage{xspace}
+
+% PDF links
+\usepackage[hidelinks]{hyperref} % backref=page
+
+% Some packages to help with tables/figures
+\usepackage[section]{placeins}
+\usepackage{morefloats}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{booktabs} 
+\usepackage{stmaryrd}
+\usepackage{times}
+\usepackage{bm}
+\usepackage{indentfirst}
+
+% Use this command to start each chapter
+% The format allows chapters in the table 
+% of contents to meet grad school requirements
+% as of 2017
+
+\newcommand{\mychapter}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter*{#2}
+    \addcontentsline{toc}{chapter}{#2}
+}
+
+
+\usepackage{appendix}
+
+\input{common/layout}
+
+\input{common/macros}
+
+
+\begin{document}
+
+% Title page, TOC, etc.
+\input{frontmatter/pages}
+
+% chapters
+% \input{intro/chapter}
+% ...
+
+<<setup, echo=FALSE, cache = FALSE, include=FALSE>>=
+
+# Use whatever options you prefer. Here are the ones I liked
+
+opts_knit$set(global.par=TRUE)
+
+opts_template$set(
+  fig.long = list(fig.width = 8, fig.height = 11, 
+                  fig.pos= "!htb", fig.align='center', echo = FALSE),
+  fig.medium = list(fig.width = 6, fig.height = 4, 
+                   fig.pos= "!htb", fig.align='center', echo = FALSE)
+)
+
+opts_chunk$set(fig.align='center', tidy = TRUE,
+               fig.show='hold',size='scriptsize',
+               echo = FALSE, cache = TRUE, message = FALSE,
+               autodep = TRUE)
+
+options(warn=-1)
+options(width = 60)
+
+@
+
+\mychapter{1}{CHAPTER 1: LITERATURE REVIEW} \label{ch:1}
+
+\section{Introduction}
+
+Hello! I hope you find these files useful. The macros file holds a few extra commands you may find useful. All you need to supply is your own .bib file. Otherwise, just input your information in the frontmatter files and enjoy writing your dissertation.
+
+\mychapter{2}{CHAPTER 2: JUST A FANTASTIC IDEA}\label{ch:2}
+
+\mychapter{3}{CHAPTER 3: BUT HERE'S ANOTHER} \label{ch:3}
+
+\mychapter{4}{CHAPTER 4: NOT SO SURE ABOUT THIS ONE} \label{ch:4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bibliography
+
+\clearpage
+\phantomsection
+
+{\def\chapter*#1{} % suppress bibliograph header.
+\begin{singlespace}
+\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\begin{center}
+\Large \textbf{BIBLIOGRAPHY}
+\vspace{17pt}
+\end{center}
+
+\bibliographystyle{apalike}
+% Place .bib file here -->
+\bibliography{dissertation_bibliography}
+\end{singlespace}
+}
+
+\end{document}

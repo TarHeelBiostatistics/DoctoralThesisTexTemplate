@@ -1,40 +1,99 @@
 ---
-title: "Example Dissertation"
-author: "Bradley Saul"
-date: "June 22, 2017"
+title: "Treble in River City: All about that Bass"
+author: 
+  first: Geoff
+  last: Coopersnickles
+  middle: M.
+year: 2017
+fontsize: 12pt
 output: 
   pdf_document:
     citation_package: natbib
     keep_tex: true
     fig_caption: true
     latex_engine: pdflatex
-    template: UNC_thesis_template.tex
+    template: template/template.tex
+    includes: 
+      in_header: example_header_include.tex
 bibliography: example.bib
+bibliography-style: asa
+toc: true
+lot: true
+lof: true
+committee:
+  advisors: 
+    - Dr. Sara Goldfinger
+    - Dr. Patricia No
+  members: 
+    - Dr. Who
+    - Mr. Mick Jagger
+    - Dr. Strangelove
+    - Dr. Doolittle
+degree: Doctor of Philosophy
+department: Biostatistics
+school: Gillings School of Global Public Health
+dedication: I hope we passed the audition.
+abstract: Here's a little thing I wrote. You might want to read it word for word.
+acknowledgements: Thanks grandma!
+abbreviations:
+ - short: LM
+   long: "Linear Model"
+ - short: GLM
+   long: "Generalized Linear Model"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction
 
-This is an example thesis .Rmd template, which, when compiled, uses the `UNC_thesis_template.tex` file to create both a `.tex` file and a `.pdf` file.
+# Introduction 
 
-NOTE: `UNC_thesis_template.tex` is under development and does NOT (yet) meet the UNC graduate school guidelines.
+## Getting started
 
-# Chapter 2
+This is an example thesis .Rmd template, which, when compiled, uses the `template.tex` file to create both a `.tex` file and a `.pdf` file.
+
+NOTE: `template.tex` is under development.
+
+You can put custom definitions in a file to be included in the .tex header. For example, putting 
+```
+\def\cA{{\mathcal{A}}} 
+```
+in `example_header_include.tex`  allow you to type `\cA` in the text which, when compiled, yields: $\cA$. Change the filename as necessary but be sure to update the filename in the YAML header.
+
+## Another thing
+
+I have more to say such as, "I can put a table here"
+
+\begin{table}[ht]
+\caption{This is my first table.}
+\label{tab:1}
+\begin{tabular}{c|c}
+$\sigma$ & $\theta$ \\
+\hline \\
+1.2 & 4 
+\end{tabular}
+\end{table}
+
+# My estimator beats your estimator
+
+## Put all you work here
 
 One could put all the text in a single `.Rmd` file.
 
-# Chapter 3
+## Or in separate files
 
 ```{r, child='example_child.Rmd'}
 ```
 
-## How to make Citations 
+# How to cite
+
+You can also cite other papers.
+
+## rmarkdown syntax
 
 You cite articles using `rmarkdown` syntax (google rmarkdown for helpful hints). For example, @halmos1970howto is a good text read. Or writing about mathematics is challenging [@halmos1970howto].
 
-# References
+
 
 

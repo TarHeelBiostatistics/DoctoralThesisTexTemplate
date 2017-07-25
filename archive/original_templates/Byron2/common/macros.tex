@@ -1,0 +1,98 @@
+% citation style
+
+% default: cite with (Name, year)
+\renewcommand{\cite}{\citep}
+
+% common abbreviations
+\newcommand{\eg}{{\it e.g.}\xspace}
+\newcommand{\ie}{{\it i.e.}\xspace}
+\newcommand{\etc}{{\it etc.}\xspace}
+\newcommand{\etal}{\emph{et~al}\mbox{.}\xspace}
+\newcommand{\vs}{{vs\mbox{.}}\xspace}
+
+% common Math notation
+\newcommand{\NAT}[0]{\mathbb{N}\xspace}
+\newcommand{\fun}[1]{\mathit{#1}} % typeset as function name
+\newcommand{\setsize}[1]{\left| #1 \right|}
+\newcommand{\setdef}[2]{\left\{ #1 \ \left|\  #2\right.\right\}}
+\newcommand{\dispsum}[0]{\displaystyle\sum}
+
+\newcommand{\defeq}[0]{\triangleq}
+\renewcommand{\mod}{\operatorname{mod}}
+
+
+% references
+\newcommand{\chref}[1]{Chapter~\ref{ch:#1}\xspace}
+\newcommand{\chrefs}[2]{Chapters~\ref{ch:#1} and~\ref{ch:#2}\xspace}
+\newcommand{\secref}[1]{Section~\ref{sec:#1}\xspace}
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}\xspace}
+\newcommand{\figrefi}[2]{Figure~\ref{fig:#1}(#2)\xspace}
+\newcommand{\tabref}[1]{Table~\ref{tab:#1}\xspace}
+\newcommand{\lemref}[1]{Lemma~\ref{lem:#1}\xspace}
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}\xspace}
+\newcommand{\defref}[1]{Definition~\ref{def:#1}\xspace}
+\newcommand{\exref}[1]{Example~\ref{ex:#1}\xspace}
+\newcommand{\equref}[1]{Equation~(\ref{eq:#1})\xspace}
+\newcommand{\inequref}[1]{Inequality~(\ref{eq:#1})\xspace}
+\newcommand{\lstref}[1]{Listing~\ref{lst:#1}\xspace}
+\newcommand{\pref}[1]{page~\pageref{p:#1}\xspace}
+% citations
+
+
+% special footnotes
+
+% from http://help-csli.stanford.edu/tex/latex-footnotes.shtml
+\long\def\symbolfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+% Theorems, etc.
+
+\newtheoremstyle{mylemthm}% hnamei 
+        {6pt}% hSpace abovei 
+        {3pt}% hSpace belowi 
+        {\slshape}% hBody fonti 
+        {}% hIndent amounti1
+        {\bfseries}% hTheorem head fonti 
+        {.}% hPunctuation after theorem headi 
+        {.5em}% hSpace after theorem headi2
+        {}% hTheorem head spec (can be left empty, meaning `normal')i
+
+\theoremstyle{mylemthm}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+
+%\theoremstyle{definition}
+
+\newtheoremstyle{mydef}% hnamei 
+        {3pt}% hSpace abovei 
+        {3pt}% hSpace belowi 
+        {\normalfont}% hBody fonti 
+        {}% hIndent amounti1
+        {\bfseries}% hTheorem head fonti 
+        {.}% hPunctuation after theorem headi 
+        {.5em}% hSpace after theorem headi2
+        {\thmname{#1} \thmnumber{#2}\thmnote{#3}}% hTheorem head spec (can be left empty, meaning `normal')i
+
+\theoremstyle{mydef}
+
+
+%% Flush words right at end of paragraph.
+%% From: http://tex.stackexchange.com/questions/16330/hfill-after-linebreak
+\newcommand\rightparend[1]{{%
+      \unskip\nobreak\hfil\penalty50
+      \hskip2em\hbox{}\nobreak\hfil\textbf{#1}%
+      \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
+
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{xxexample}{Example}[chapter]
+
+%% "inherent" from xxexample, but place box at the end of example.
+\newenvironment{example}{
+\begin{xxexample}
+}{
+\rightparend{$\Diamond$}
+\end{xxexample}
+}
+% \qed   \sqbullet \blackdiamond \vartriangleleft
