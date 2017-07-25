@@ -30,6 +30,7 @@ committee:
     - Mr. Mick Jagger
     - Dr. Strangelove
     - Dr. Doolittle
+degree: Doctor of Philosophy
 dedication: I hope we passed the audition.
 abstract: Here's a little thing I wrote. You might want to read it word for word.
 acknowledgements: Thanks grandma!
