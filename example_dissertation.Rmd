@@ -1,16 +1,9 @@
 ---
-title: "Example Dissertation"
+title: "Treble in River City: All about that Bass"
 author: 
-  first: First
-  last: Last
+  first: Geoff
+  last: Coopersnickles
   middle: M.
-  committee:
-    advisora: Dr. Friendly Advisor
-    advisorb: Dr. Awesome Advisor
-    membera: Dr. Who
-    memberb: Major Major Major Major
-    memberc: Dr. Strangelove
-    memberd: Dr. Doolittle
 date: "June 22, 2017"
 fontsize: 12pt
 documentclass: report
@@ -20,14 +13,31 @@ output:
     keep_tex: true
     fig_caption: true
     latex_engine: pdflatex
-    template: UNC_thesis_template.tex
+    template: template/template2.tex
     includes: 
       in_header: example_header_include.tex
 bibliography: example.bib
 bibliography-style: asa
 toc: true
 lot: true
-abstract: I have an abstract!
+lof: true
+committee:
+  advisors: 
+    - Dr. Sara Goldfinger
+    - Dr. Patricia No
+  members: 
+    - Dr. Who
+    - Mr. Mick Jagger
+    - Dr. Strangelove
+    - Dr. Doolittle
+dedication: I hope we passed the audition.
+abstract: Here's a little thing I wrote. You might want to read it word for word.
+acknowledgements: Thanks grandma!
+abbreviations:
+ - short: LM
+   long: "Linear Model"
+ - short: GLM
+   long: "Generalized Linear Model"
 ---
 
 ```{r setup, include=FALSE}
