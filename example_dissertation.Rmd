@@ -13,7 +13,7 @@ output:
     keep_tex: true
     fig_caption: true
     latex_engine: pdflatex
-    template: template/template2.tex
+    template: template/template.tex
     includes: 
       in_header: example_header_include.tex
 bibliography: example.bib
