@@ -51,9 +51,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Getting started
 
-This is an example thesis .Rmd template, which, when compiled, uses the `UNC_thesis_template.tex` file to create both a `.tex` file and a `.pdf` file.
+This is an example thesis .Rmd template, which, when compiled, uses the `template.tex` file to create both a `.tex` file and a `.pdf` file.
 
-NOTE: `UNC_thesis_template.tex` is under development and does NOT (yet) meet the UNC graduate school guidelines.
+NOTE: `template.tex` is under development.
 
 You can put custom definitions in a file to be included in the .tex header. For example, putting 
 ```
