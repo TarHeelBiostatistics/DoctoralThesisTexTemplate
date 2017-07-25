@@ -7,3 +7,7 @@
 example_dissertation.tex
 *.Rproj
 *.DS_Store
+*.log
+*.gz
+*.dvi
+*.aux
