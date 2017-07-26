@@ -4,15 +4,15 @@ Please help TarHeelBiostatistics ("THB") to improve and upkeep this template for
 
 ### You don't need a GitHub account to help us
 
-But it does help! We primarily work on GitHub, so we recommend you start your own (free) account. If you don't want to get an account, please contact (Phoebe)[https://github.com/phoebejiang] via email to help us improve this dissertation template.
+But it does help! We primarily work on GitHub, so we recommend you start your own (free) account. If you don't want to get an account, please contact [Phoebe](https://github.com/phoebejiang) via email to help us improve this dissertation template.
 
 Here's how to help us on GitHub:
 
-## Got a question, comment, or just need help? Start at our (Issues page)[https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/issues]! (level: super easy!)
+## Got a question, comment, or just need help? Start at our [Issues page](https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/issues).  (level: super easy!)
 
-(Issues)[https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/issues] are a great place to start a discussion. What happens is: a user posts a question or comment, and then others respond and discuss until we arrive at a solution. So,
+[Issues](https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/issues) are a great place to start a discussion. What happens is: a user posts a question or comment, and then others respond and discuss until we arrive at a solution. So,
 
-1. Search (our issues page)[https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/issues] to see if someone has already posted an issue/comment/question similar to yours.
+1. Search [our issues page](https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/issues) to see if someone has already posted an issue/comment/question similar to yours.
   - We may have already solved what you're asking about!
 2. If 1. fails, post your own issue!
   - Click on "New Issue" and type up a description of what you want to ask about. 
@@ -22,7 +22,7 @@ Here's how to help us on GitHub:
   
 ## Pull requests and forks (level: easy)
 
-If you'd like to make some changes, you can submit a (pull request)[https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/pulls] for us to integrate your changes from your forked repository. Before making changes, please file an issue first so we can have a discussion.
+If you'd like to make some changes, you can submit a [pull request](https://github.com/TarHeelBiostatistics/DoctoralThesisTexTemplate/pulls) for us to integrate your changes from your forked repository. Before making changes, please file an issue first so we can have a discussion.
 
 To fork the repository and make a copy that you can make updates to, simply hit the Fork button in the upper right of our repo's page.
 
