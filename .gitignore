@@ -11,3 +11,4 @@ example_dissertation.tex
 *.gz
 *.dvi
 *.aux
+*.html
