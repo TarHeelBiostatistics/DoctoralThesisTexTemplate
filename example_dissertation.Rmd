@@ -1,9 +1,9 @@
 ---
 title: "Treble in River City: All about that Bass"
 author: 
-  first: Geoff
+  first: Virginia
   last: Coopersnickles
-  middle: M.
+  middle: P.
 year: 2017
 fontsize: 12pt
 output: 
