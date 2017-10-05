@@ -1,6 +1,7 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$,letterpaper,twoside]{report}
 \usepackage[]{graphicx}
 \usepackage[]{color}
+
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -242,7 +243,7 @@ ALL RIGHTS RESERVED
 
 \begin{center}
 \vspace*{52pt}
-{\Large \textbf{ABSTRACT}}
+{\normalsize \textbf{ABSTRACT}}
 \vspace{11pt}
 
 \begin{singlespace}
@@ -283,7 +284,7 @@ $endif$
 $if(acknowledgements)$
 \begin{center}
 \vspace*{52pt}
-{\Large \textbf{ACKNOWLEDGEMENTS}}
+{\normalsize \textbf{ACKNOWLEDGEMENTS}}
 \end{center}
 
 $acknowledgements$
@@ -295,7 +296,7 @@ $endif$
 
 $if(toc)$
 \renewcommand{\contentsname}{TABLE OF CONTENTS}
-\renewcommand{\cfttoctitlefont}{\Large\bfseries}
+\renewcommand{\cfttoctitlefont}{\normalsize\bfseries}
 \renewcommand{\cftaftertoctitle}{\hfill}
 \renewcommand{\cftdotsep}{1.5}
 \cftsetrmarg{1.0in}
@@ -332,7 +333,7 @@ $if(lot)$
 
 \setlength{\cftbeforelottitleskip}{-11pt}
 \setlength{\cftafterlottitleskip}{22pt}
-\renewcommand{\cftlottitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftlottitlefont}{\hfill\normalsize\bfseries}
 \renewcommand{\cftafterlottitle}{\hfill}
 
 \setlength{\cftbeforetabskip}{10pt}
@@ -352,7 +353,7 @@ $if(lof)$
 
 \setlength{\cftbeforeloftitleskip}{-11pt} %11
 \setlength{\cftafterloftitleskip}{22pt} %22
-\renewcommand{\cftloftitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftloftitlefont}{\hfill\normalsize\bfseries}
 \renewcommand{\cftafterloftitle}{\hfill}
 
 \setlength{\cftbeforefigskip}{10pt}
@@ -370,7 +371,7 @@ $if(abbreviations)$
 \addcontentsline{toc}{chapter}{LIST OF ABBREVIATIONS}
 
 \begin{center}
-{\Large \textbf{LIST OF ABBREVIATIONS}}
+{\normalsize \textbf{LIST OF ABBREVIATIONS}}
 \end{center}
 
 \newcommand{\Ab}[2]{\noindent  #1 \> #2 \\}
@@ -402,7 +403,7 @@ $body$
 \begin{singlespace}
 \addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
 \begin{center}
-\Large \textbf{BIBLIOGRAPHY}
+\normalsize \textbf{BIBLIOGRAPHY}
 \vspace{17pt}
 \end{center}
 
